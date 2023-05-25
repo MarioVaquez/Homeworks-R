@@ -1,0 +1,46 @@
+tarea 1
+```{r}
+vector_lbs1 <- c(160:164)
+vector_lbs2 <- c(170:174)
+vector_lbs3 <- c(180:184)
+vector_lbs4 <- c(190:194)
+vector_lbs5 <- c(195:199)
+
+vector_peso <- c(vector_lbs1, vector_lbs2, vector_lbs3, vector_lbs4, vector_lbs5) 
+matriz_peso <- matrix(vector_peso, nrow = 5, byrow = 5)
+
+colnames(matriz_peso) <- c("enero", "febrero", "marzo", "abril", "mayo")
+rownames(matriz_peso) <- c("ana","beto","carlos","diana","esteban")
+nombres <- c("ana","beto","carlos","diana","esteban")
+
+matriz_peso
+
+#sum_filas <- rowSums(matriz_peso, na.rm = TRUE)
+#promedio_filas <- sum_filas / ncol(matriz_peso)
+
+promedio_fila2 <- rowMeans(matriz_peso)
+
+#sum_colum <- colSums(matriz_peso, na.rm = TRUE)
+#promedio_colum <- sum_colum / nrow(matriz_peso)
+
+promedio_colum2 <- colMeans(matriz_peso)
+
+tempdir()
+dir.create(tempdir())
+
+fmatriz <- rbind(matriz_peso, promedio_colum2)
+
+agregado_matriz <- c(promedio_fila2, 0)
+promedio_filass <- agregado_matriz 
+
+cmatriz <- cbind(fmatriz, promedio_filass)
+
+
+
+
+
+
+
+
+```
+
