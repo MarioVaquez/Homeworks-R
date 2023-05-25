@@ -7,33 +7,51 @@ vector_lbs4 <- c(190:194)
 vector_lbs5 <- c(195:199)
 
 vector_peso <- c(vector_lbs1, vector_lbs2, vector_lbs3, vector_lbs4, vector_lbs5) 
+
+#creacion de la matriz 5 x 5
 matriz_peso <- matrix(vector_peso, nrow = 5, byrow = 5)
 
+#nombrar las columnas
 colnames(matriz_peso) <- c("enero", "febrero", "marzo", "abril", "mayo")
+
+#nombrar las filas
 rownames(matriz_peso) <- c("ana","beto","carlos","diana","esteban")
 nombres <- c("ana","beto","carlos","diana","esteban")
 
+#verificacion de que la matriz tengo nombres en columnas y filas
 matriz_peso
 
+#esto es para verificar que la funcion rowSums y RowMeans dieran el mismo resultado
 #sum_filas <- rowSums(matriz_peso, na.rm = TRUE)
 #promedio_filas <- sum_filas / ncol(matriz_peso)
 
+
+#se saca el promedio de las filas
 promedio_fila2 <- rowMeans(matriz_peso)
 
+#esto es para verificar que la funcion colSums y colMeans dieran el mismo resultado
 #sum_colum <- colSums(matriz_peso, na.rm = TRUE)
 #promedio_colum <- sum_colum / nrow(matriz_peso)
 
+#se saca el promedio de las columnas
 promedio_colum2 <- colMeans(matriz_peso)
 
+#coloco esto por que tengo un problemas que se elimna la carpeta temporal de R al momento de trabajar y evita que me marque error en la ayuda del programa
 tempdir()
 dir.create(tempdir())
 
+#agrego la fila a la matriz existente que da de 6 x 5
 fmatriz <- rbind(matriz_peso, promedio_colum2)
 
+#agrego un dato 0 al vector de las filas para que la matriz quede cuadrada de 6 x 6
 agregado_matriz <- c(promedio_fila2, 0)
 promedio_filass <- agregado_matriz 
 
+#agrego la columna faltante
 cmatriz <- cbind(fmatriz, promedio_filass)
+
+#resultado final
+cmatriz
 
 
 
