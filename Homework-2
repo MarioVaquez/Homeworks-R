@@ -1,0 +1,123 @@
+Funcion en R
+
+Una función en R se refiere a un conjunto de instrucciones que cumplen una tarea específica dentro de un programa. Estas funciones son fundamentales para estructurar y modularizar el código, permitiendo su reutilización y mejorando la eficiencia de desarrollo.
+
+La estructura básica de una función en sigue el siguiente formato:
+
+nombre_funcion <- function(parámetros1, parámetros2, ...) 
+{
+  # Código que realiza las operaciones utilizando los parámetros
+  
+  # Retorna el resultado
+  
+  return(resultado)
+}
+
+nombre_funcion: Es el nombre descriptivo que se le asigna a la función.
+
+parámetros1, parámetros2, ...: Pueden ser uno o más y se definen dentro de los paréntesis de la función. Los parámetros son variables que se utilizan dentro de la función para realizar las operaciones necesarias
+
+Código que realiza las operaciones: Dentro del cuerpo de la función se escribe el conjunto de instrucciones que se ejecutarán cuando la función sea llamada.
+
+return(resultado): La función puede contener una o más sentencias de retorno (return()) que devuelven el resultado deseado. 
+
+ejmplo
+
+```{r}
+tempdir()
+dir.create(tempdir())
+```
+
+
+```{r}
+resta <- function(x,y)
+{
+  resultado <- x-y
+  return(resultado)
+}
+
+resta(x=10, y=5)
+
+print(resta)
+
+```
+
+En R, la familia de funciones "apply" se refiere a un conjunto de funciones que se utilizan para aplicar una determinada operación o función a los elementos de una estructura de datos, como matrices, data frames o listas. 
+
+La familia de funciones "apply" incluye las siguientes funciones principales:
+
+apply(): Se utiliza para aplicar una función a los elementos de una matriz o array a lo largo de una dimensión específica.
+
+lapply(): Se utiliza para aplicar una función a los elementos de una lista, devolviendo una lista con los resultados.
+
+sapply(): Es similar a lapply(), pero intenta simplificar los resultados, convirtiéndolos en una estructura de datos más simple si es posible (por ejemplo, una matriz o un vector).
+
+vapply(): Similar a sapply(), pero permite especificar el tipo y la estructura del resultado, lo que proporciona un control adicional sobre el tipo de salida deseado.
+
+
+ejemplo lapply
+
+```{r}
+operacion3 <- function(dato3)
+{
+  return(dato3 * 3)
+}
+
+listadatos3 <- list(1,3,5,7)
+listatriple <- lapply(listadatos3, operacion3)
+print(listatriple)
+
+mayusculas <- function(palabras)
+{
+  return(toupper(palabras))
+}
+listapalabras <- list("uno","dos","tres")
+listamayusculas <- lapply(listapalabras, mayusculas)
+print(listamayusculas)
+
+
+```
+
+ejemplos sapply
+
+```{r}
+operacion <- function(dato)
+{
+  return (dato *2)
+}
+
+vector1 <- c(1:5)
+
+respuesta <- sapply(vector1, operacion)
+
+print(respuesta)
+
+
+
+
+contador <- function(palbras2)
+{
+  return(nchar(palbras2))
+}
+listapalabras2 <- list("dos","casa","perros")
+resultadofinal <- sapply(listapalabras2, contador)
+print(resultadofinal)
+
+
+```
+ejemplso con vapply
+
+```{r}
+
+calculo2 <- function(vector) 
+  {
+  vapply(vector3, function(x) x * 2, FUN.VALUE = numeric(1))
+}
+
+
+vector3 <- c(1, 2, 3, 4, 5)
+
+resultado3 <- calculo2(vector3)
+
+print(resultado3)
+```
