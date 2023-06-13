@@ -1,0 +1,99 @@
+Investigue cómo leer un archivo CSV desde R
+Para leer un archivo CSV desde R, puedes utilizar la función read.csv() o read.csv2(), dependiendo del formato de separación de columnas que tenga el archivo.
+Si el archivo CSV utiliza punto y coma (;) en lugar de coma (,) como separador de columnas, puedes usar la función read.csv2() en su lugar.
+
+ejemplos:
+
+#Ruta del archivo CSV
+#ruta_archivo <- "ruta_del_archivo.csv"
+
+#Leer el archivo CSV
+#datos <- read.csv(ruta_archivo)
+
+# Ver los datos
+#print(datos)
+
+# Ruta del archivo CSV
+#ruta_archivo <- "ruta_del_archivo.csv"
+
+# Leer el archivo CSV con separador punto y coma
+#datos <- read.csv2(ruta_archivo)
+
+# Ver los datos
+#print(datos)
+
+la función select() es parte de la paquetería dplyr en R y se utiliza para seleccionar columnas específicas de un conjunto de datos. Permite crear un nuevo conjunto de datos que solo contiene las columnas seleccionadas.
+
+La sintaxis básica de la función select() es la siguiente: select(datos, columna1, columna2, ...)
+
+Donde:
+
+datos es el conjunto de datos del cual deseas seleccionar las columnas.
+columna1, columna2, ... son los nombres de las columnas que deseas seleccionar.
+
+La función select() también proporciona una variedad de operadores especiales que te permiten seleccionar columnas de forma más flexible. Algunos ejemplos de operadores que puedes utilizar son:
+
+:: selecciona un rango de columnas.
+starts_with(): selecciona columnas que comienzan con un cierto prefijo.
+ends_with(): selecciona columnas que terminan con un cierto sufijo.
+contains(): selecciona columnas que contienen una cierta cadena de texto.
+
+
+Lea el dataset compartido (primary_results.csv) y asignelo a la variable dataset_results
+```{r}
+
+rutacsv <- "C:/Users/mario/Desktop/FUNDAMENTOS DE PROGRAMACIÓN Y SCRIPTING/tarea 3/primary_results.csv"
+dataset_results <- read.csv(rutacsv)
+print(dataset_results)
+
+#Filtrar todos los votos del estado de Florida.
+
+library(dplyr)
+dataset_results %>%
+  filter(county == "Florida" )
+
+#Utilice operadores lógicos (& and |), según corresponda
+#Filtrar votos para los candidatos Hillary Clinton o Donald Trump
+
+dataset_results %>%
+  filter(candidate== "Hillary Clinton" | candidate== "Donald Trump" )
+
+#Filtrar votos para el partido Demócrata y el condado Shelby
+
+dataset_results %>%
+  filter(party == "Democrat" & county == "Shelby")
+
+#Filtrar votos para el estado de Alabama y que la cantidad de votos sea mayor a 15000
+
+dataset_results %>%
+  filter(state == "Alabama" & votes > 1500)
+
+#Utilice la función select y arrange para el siguiente filtrado:
+#Filtrar votos para el estado de Texas y el condado Denton, seleccionando
+#únicamente las columnas party, candidate, votes, luego ordene de forma
+#descendente por la columna votes.
+
+csvfltrado <- dataset_results %>%
+    filter(state == "Texas" & county == "Denton")
+print(csvfltrado)
+
+csvseleccion <- csvfltrado %>%
+   select(party, candidate, votes)%>%
+   arrange(desc(votes))
+print(csvseleccion)
+
+#Utilice el verbo mutate y arrange para el siguiente filtrado:
+#Filtrar por el partido Republicano, que el candidato sea Ted Cruz en el estado de
+#Alaska, luego agregue una columna que se llame vote_count que sea la división de
+#votes por fraction_votes (votes/fraction_votes), finalmente ordene de forma
+#descendente por vote_count.
+
+csvfltrado2 <- dataset_results %>%
+    filter(party == "Republican", candidate == "Ted Cruz", state == "Alaska")
+print(csvfltrado2)
+
+
+csvseleccion2 <- csvfltrado2 %>%
+   mutate( vote_count = votes / fraction_votes )%>%
+   arrange(desc(vote_count))
+print(csvseleccion2)
